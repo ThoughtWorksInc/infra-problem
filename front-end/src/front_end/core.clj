@@ -28,4 +28,5 @@
 (defn -main []
   (let [port (:app_port config)]
     (log/info "Running front-end on port" port)
-    (future (jetty/run-jetty (var app) {:port port}))))
+    (future (jetty/run-jetty (var app) {:host "0.0.0.0"
+                                        :port port}))))
