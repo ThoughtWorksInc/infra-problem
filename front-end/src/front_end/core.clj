@@ -7,16 +7,15 @@
             [front-end.quotes :as q]
             [clojure.tools.logging :as log]
             [ring.middleware.reload :refer [wrap-reload]]
-            [selmer.parser :refer :all]
+            [front-end.utils :refer :all]
             [http.async.client :as http]
             [ring.adapter.jetty :as jetty]))
 
 (defn index []
-  (print "Getting quote")
   (with-open [client (http/create-client)]
     (let [resp (q/get-quote client)]
       (log/debug "Got quote")
-      (render-file "views/templates/home.html" {:quote resp}))))
+      (template "views/templates/home.html" {:quote resp}))))
 
 (defroutes app-routes
   (GET "/" [] (index)))
@@ -27,6 +26,6 @@
       wrap-reload))
 
 (defn -main []
-  (let [port (Integer/parseInt (utils/config "APP_PORT" 8080))]
+  (let [port (:app_port config)]
     (log/info "Running front-end on port" port)
     (future (jetty/run-jetty (var app) {:port port}))))
