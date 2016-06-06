@@ -14,6 +14,7 @@
   :ring {:handler front-end.core/app-routes}
   :main ^:skip-aot front-end.core
   :target-path "target/%s"
+  :resources-paths ["resources/"]
   :profiles {:uberjar {:aot :all}
              :dev     {:dependencies [[peridot "0.4.3"]
                                       [midje "1.8.3"]]

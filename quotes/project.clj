@@ -10,6 +10,7 @@
   :ring {:handler quotes.routes/app}
   :main ^:skip-aot quotes.routes
   :target-path "target/%s"
+  :resource-paths ["resources/"]
   :profiles {:uberjar {:aot :all}
              :dev     {:dependencies [[peridot "0.4.3"]
                                       [midje "1.8.3"]]

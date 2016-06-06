@@ -4,7 +4,7 @@
             [clojure.data.json :as json]
             [ring.util.response :refer :all]))
 
-(def quotes (json/read-str (slurp (io/file (io/resource "quotes.json")))))
+(def quotes (json/read-str (slurp (io/resource "quotes.json"))))
 
 (defn get-quote []
   (-> (response (json/write-str (rand-nth quotes)))
