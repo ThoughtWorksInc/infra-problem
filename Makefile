@@ -24,10 +24,10 @@ test: $(addsuffix .test, $(LIBS) $(APPS))
 clean:
 	rm -rf $(BUILD_DIR) $(addsuffix /target, $(APPS))
 
-$(APP_JARS): $(BUILD_DIR)
+$(APP_JARS): | $(BUILD_DIR)
 	cd $(notdir $(@:.jar=)) && lein uberjar && cp target/uberjar/*-standalone.jar ../$@
 
-$(STATIC_ARCHIVE): $(BUILD_DIR)
+$(STATIC_ARCHIVE): | $(BUILD_DIR)
 	tar -c -C $(STATIC_BASE) -z -f $(STATIC_ARCHIVE) $(STATIC_PATHS)
 
 $(BUILD_DIR):
