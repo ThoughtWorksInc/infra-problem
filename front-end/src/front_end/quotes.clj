@@ -1,5 +1,5 @@
 (ns front-end.quotes
-  (:require [front-end.utils :as utils]
+  (:require [common-utils.core :as utils]
             [clojure.data.json :as json]
             [clojure.tools.logging :as log]
             [http.async.client :as http]

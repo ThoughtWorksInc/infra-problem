@@ -1,10 +1,17 @@
 BUILD_DIR=build
 APPS=front-end quotes
+LIBS=common-utils
+INSTALL_TARGETS=$(addsuffix .install, $(LIBS))
 APP_JARS=$(addprefix $(BUILD_DIR)/, $(addsuffix .jar, $(APPS)))
 
-all: $(BUILD_DIR) $(APP_JARS)
+all: $(BUILD_DIR) $(INSTALL_TARGETS) $(APP_JARS)
 
-test: $(addsuffix .test, $(APPS))
+libs: $(INSTALL_TARGETS)
+
+%.install:
+	cd $* && lein install
+
+test: $(addsuffix .test, $(LIBS) $(APPS))
 
 %.test:
 	cd $* && lein midje

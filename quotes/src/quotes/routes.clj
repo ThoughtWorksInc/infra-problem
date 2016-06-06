@@ -3,19 +3,10 @@
   (:use [quotes.api :only [api-routes]])
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
+            [common-utils.core :as utils]
+            [common-utils.middleware :refer [correlation-id-middleware]]
+            [clojure.tools.logging :as log]
             [ring.adapter.jetty :as jetty]))
-
-(defn get-or-generate-correlation-id
-  [request]
-  (get-in request
-          [:headers  "x-correlation-id"]
-          (str (java.util.UUID/randomUUID))))
-
-(defn correlation-id-middleware [app]
-  (fn [request]
-    (let [correlation-id (get-or-generate-correlation-id request)]
-      (let [response (app (assoc-in request [:headers "x-correlation-id"] correlation-id))]
-        (assoc-in response [:headers "X-Correlation-ID"] correlation-id)))))
 
 (defroutes app-routes
   (context "/api" []
@@ -26,4 +17,6 @@
       correlation-id-middleware))
 
 (defn -main []
-  (future (jetty/run-jetty (var app) {:port 8080})))
+  (let [port (Integer/parseInt (utils/config "APP_PORT" 8080))]
+    (log/info "Running quotes on port" port)
+    (future (jetty/run-jetty (var app) {:port port}))))

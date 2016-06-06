@@ -2,7 +2,8 @@
   (:gen-class)
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
-            [front-end.utils :as utils]
+            [common-utils.core :as utils]
+            [common-utils.middleware :as mw]
             [front-end.quotes :as q]
             [clojure.tools.logging :as log]
             [ring.middleware.reload :refer [wrap-reload]]
@@ -22,7 +23,10 @@
 
 (def app
   (-> app-routes
+      mw/correlation-id-middleware
       wrap-reload))
 
 (defn -main []
-  (future (jetty/run-jetty (var app) {:port 8090})))
+  (let [port (Integer/parseInt (utils/config "APP_PORT" 8080))]
+    (log/info "Running front-end on port" port)
+    (future (jetty/run-jetty (var app) {:port port}))))

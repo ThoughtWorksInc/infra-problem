@@ -2,6 +2,7 @@
   :description "Front-end webapp for assessment"
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/data.json "0.2.6"]
+                 [com.thoughtworks/common-utils "0.1.0-SNAPSHOT"]
                  [compojure "1.5.0"]
                  [selmer "1.0.4"]
                  [http.async.client "1.1.0" :exclusions [[org.slf4j/slf4j-api]]] ; Otherwise logging isn't set up correctly
