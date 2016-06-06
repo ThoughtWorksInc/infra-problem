@@ -1,0 +1,6 @@
+{% extends "views/templates/base.html" %}
+
+{% block body %}
+<h1>Welcome!</h1>
+<cite>{{ quote.quote | linebreaks }}</cite> <p class="author">{{ quote.author }}</p>
+{% endblock %}
