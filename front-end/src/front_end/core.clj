@@ -1,4 +1,5 @@
 (ns front-end.core
+  (:gen-class)
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
             [front-end.utils :as utils]

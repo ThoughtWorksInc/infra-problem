@@ -1,4 +1,5 @@
 (ns quotes.routes
+  (:gen-class)
   (:use [quotes.api :only [api-routes]])
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
