@@ -15,12 +15,13 @@
               :user-agent "front-end"})
 
 (defn- handle-response
-  [resp]
-  (let [status (:status @resp)]
-    (if (and (>= 200 status)
-             (< status 300))
-      @resp
-      (throw (Exception. (str "Error getting response: status " status " returned"))))))
+  [response]
+  (let [error (:error @response)
+        status (:status @response)]
+    (cond (not (nil? error))                   (throw (Exception. "Feed returned error" error))
+          (nil? status)                        (throw (Exception. (str "Could not get status of response" response)))
+          (or (< status 200) (>= status 300))  (throw (Exception. (str "Error getting response: status " status " returned")))
+          :else                                @response)))
 
 (defn get-quote []
   (http/get (str quote-service-url "/api/quote") options))
