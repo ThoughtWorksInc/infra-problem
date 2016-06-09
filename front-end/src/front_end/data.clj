@@ -1,7 +1,6 @@
 (ns front-end.data
   (:require [common-utils.core :as utils]
             [clojure.data.json :as json]
-            [clojure.tools.logging :as log]
             [org.httpkit.client :as http]))
 
 (def quote-service-url
