@@ -37,7 +37,7 @@
   (let [date (or (get entry "updated-date")
                  (get entry "published-date"))]
     (log/debug entry date)
-    (assoc-in entry [:date] date)))
+    (assoc-in entry ["date"] date)))
 
 (defn handle-news-response
   [resp]

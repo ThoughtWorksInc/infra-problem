@@ -5,16 +5,17 @@
             [common-utils.core :as utils]
             [common-utils.middleware :as mw]
             [front-end.data :as d]
+            [front-end.views :as views]
+            [front-end.utils :refer :all]
             [clojure.tools.logging :as log]
             [ring.middleware.reload :refer [wrap-reload]]
-            [front-end.utils :refer :all]
             [ring.adapter.jetty :as jetty]))
 
 (defn index []
   (let [q (d/get-quote)
         n (d/get-news)]
-    (template "views/templates/home.html" {:quote (d/handle-quote-response q)
-                                           :news  (d/handle-news-response n)})))
+    (views/index (d/handle-quote-response q)
+                 (d/handle-news-response n))))
 
 (defroutes app-routes
   (GET "/" [] (index))

@@ -4,7 +4,7 @@
                  [org.clojure/data.json "0.2.6"]
                  [com.thoughtworks/common-utils "0.1.0-SNAPSHOT"]
                  [compojure "1.5.0"]
-                 [selmer "1.0.4"]
+                 [hiccup "1.0.5"]
                  [http-kit "2.1.18"]
                  [org.clojure/tools.logging "0.3.1"]
                  [ch.qos.logback/logback-classic "1.1.7"]
