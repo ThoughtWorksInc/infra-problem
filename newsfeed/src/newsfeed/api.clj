@@ -44,7 +44,7 @@
 
 (defn combine-feeds
   [feeds]
-  (reverse (sort-by get-sort-value (apply concat (map :entries feeds)))))
+  (take 20 (reverse (sort-by get-sort-value (apply concat (map :entries feeds))))))
 
 (defn process-feed
   [feed]
