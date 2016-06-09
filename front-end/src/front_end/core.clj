@@ -17,6 +17,14 @@
     (views/index (d/handle-quote-response q)
                  (d/handle-news-response n))))
 
+(defn- wrap-exception-handling
+  [app]
+  (fn [request]
+    (try (app request)
+         (catch Exception e (do (log/error e (str (clojure.string/upper-case (name (:request-method request))) " " (:uri request)))
+                                {:status 500
+                                 :body   (views/error)})))))
+
 (defroutes app-routes
   (GET "/" [] (index))
   (route/not-found "<h1>Not found</h1>"))
@@ -24,6 +32,7 @@
 (def app
   (-> app-routes
       mw/correlation-id-middleware
+      wrap-exception-handling
       wrap-reload))
 
 (defn -main []

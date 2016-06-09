@@ -20,6 +20,9 @@
             (include-css (str (:static_path cfg) "/css/bootstrap.min.css"))]
            [:body [:div.container content]])))
 
+(defn error []
+  (base [:h1 "Internal error"]
+        [:div.row [:div.alert.alert-danger "An error occurred when processing your request. Please try again later"]]))
 
 (defn index
   [quot news]
