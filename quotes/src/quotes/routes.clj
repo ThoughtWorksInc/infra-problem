@@ -17,7 +17,7 @@
       correlation-id-middleware))
 
 (defn -main []
-  (let [port (Integer/parseInt (utils/config "APP_PORT" 8080))]
+  (let [port (Integer/parseInt (utils/config "APP_PORT" "8080"))]
     (log/info "Running quotes on port" port)
     (future (jetty/run-jetty (var app) {:host "0.0.0.0"
                                         :port port}))))
