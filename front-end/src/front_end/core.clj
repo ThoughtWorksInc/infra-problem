@@ -4,21 +4,21 @@
             [compojure.route :as route]
             [common-utils.core :as utils]
             [common-utils.middleware :as mw]
-            [front-end.quotes :as q]
+            [front-end.data :as d]
             [clojure.tools.logging :as log]
             [ring.middleware.reload :refer [wrap-reload]]
             [front-end.utils :refer :all]
-            [http.async.client :as http]
             [ring.adapter.jetty :as jetty]))
 
 (defn index []
-  (with-open [client (http/create-client)]
-    (let [resp (q/get-quote client)]
-      (log/debug "Got quote")
-      (template "views/templates/home.html" {:quote resp}))))
+  (let [q (d/get-quote)
+        n (d/get-news)]
+    (template "views/templates/home.html" {:quote (d/handle-quote-response q)
+                                           :news  (d/handle-news-response n)})))
 
 (defroutes app-routes
-  (GET "/" [] (index)))
+  (GET "/" [] (index))
+  (route/not-found "<h1>Not found</h1>"))
 
 (def app
   (-> app-routes

@@ -5,7 +5,7 @@
                  [com.thoughtworks/common-utils "0.1.0-SNAPSHOT"]
                  [compojure "1.5.0"]
                  [selmer "1.0.4"]
-                 [http.async.client "1.1.0" :exclusions [[org.slf4j/slf4j-api]]] ; Otherwise logging isn't set up correctly
+                 [http-kit "2.1.18"]
                  [org.clojure/tools.logging "0.3.1"]
                  [ch.qos.logback/logback-classic "1.1.7"]
                  [ring/ring-devel "1.4.0"]

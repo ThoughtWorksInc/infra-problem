@@ -1,10 +1,21 @@
 {% extends "views/templates/base.html" %}
 
 {% block body %}
-<h1>Company News</h1>
+<h1>Newsfeed</h1>
 <div class="row">
-  <div class="col-md-8">
-    <h2>News</h2>
+  <div class="col-md-8 newsfeed">
+    <ol class="list-unstyled">
+        {% for item in news %}
+        <li>
+            <h3><a href="{{ item.link }}">{{ item.title }}</a></h3>
+            <time datetime="{{ item.date|date:"yyyy-MM-dd'T'HH:mm:ss.SSSZ" }}">{{ item.date|date:mediumDateTime }}</time>
+            <cite>
+                <a href="{{ item.source.link }}">{{ item.source.title }}</a>
+            </cite>
+            {% for c in item.contents %}hi{{ c.value | safe }}{% endfor %}
+        </li>
+        {% endfor %}
+    </ol>
   </div>
   <div class="col-md-4">
     <blockquote>
