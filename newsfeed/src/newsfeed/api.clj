@@ -10,7 +10,9 @@
 (def options {:timeout 1000
               :user-agent "Newsfeed"})
 
-(def feed-urls [;;"https://news.ycombinator.com/rss"
+(def feed-urls ["https://www.reddit.com/r/sysadmin/.rss"
+                "https://www.reddit.com/r/programming/.rss"
+                "https://news.ycombinator.com/rss"
                 "http://www.martinfowler.com/feed.atom"
                 "https://www.thoughtworks.com/rss/insights.xml"])
 
