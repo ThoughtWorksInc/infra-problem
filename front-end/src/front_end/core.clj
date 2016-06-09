@@ -9,7 +9,7 @@
             [front-end.utils :refer :all]
             [clojure.tools.logging :as log]
             [ring.middleware.reload :refer [wrap-reload]]
-            [ring.adapter.jetty :as jetty]))
+            [org.httpkit.server :refer [run-server]]))
 
 (defn index []
   (let [q (d/get-quote)
@@ -29,5 +29,5 @@
 (defn -main []
   (let [port (:app_port config)]
     (log/info "Running front-end on port" port)
-    (future (jetty/run-jetty (var app) {:host "0.0.0.0"
-                                        :port port}))))
+    (run-server (var app) {:ip "0.0.0.0"
+                           :port port})))

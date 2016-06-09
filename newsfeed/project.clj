@@ -7,8 +7,7 @@
                  [http-kit "2.1.18"]
                  [org.clojars.scsibug/feedparser-clj "0.4.0"]
                  [org.clojure/tools.logging "0.3.1"]
-                 [ring/ring-devel "1.4.0"]
-                 [ring/ring-jetty-adapter "1.4.0"]]
+                 [ring/ring-devel "1.4.0"]]
   :main ^:skip-aot newsfeed.core
   :target-path "target/%s"
   :resource-paths ["resources/"]

@@ -3,9 +3,9 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/data.json "0.2.6"]
                  [compojure "1.5.0"]
+                 [http-kit "2.1.18"]
                  [com.thoughtworks/common-utils "0.1.0-SNAPSHOT"]
-                 [org.clojure/tools.logging "0.3.1"]
-                 [ring/ring-jetty-adapter "1.4.0"]]
+                 [org.clojure/tools.logging "0.3.1"]]
   :plugins [[lein-ring "0.9.7"]]
   :ring {:handler quotes.routes/app}
   :main ^:skip-aot quotes.routes

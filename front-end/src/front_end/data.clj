@@ -41,10 +41,8 @@
 
 (defn- process-entry
   [entry]
-  (log/info "processing")
   (let [date (or (get entry "updated-date")
                  (get entry "published-date"))]
-    (log/debug entry date)
     (assoc-in entry ["date"] date)))
 
 (defn handle-news-response

@@ -8,8 +8,7 @@
                  [http-kit "2.1.18"]
                  [org.clojure/tools.logging "0.3.1"]
                  [ch.qos.logback/logback-classic "1.1.7"]
-                 [ring/ring-devel "1.4.0"]
-                 [ring/ring-jetty-adapter "1.4.0"]]
+                 [ring/ring-devel "1.4.0"]]
   :plugins [[lein-ring "0.9.7"]]
   :ring {:handler front-end.core/app-routes}
   :main ^:skip-aot front-end.core

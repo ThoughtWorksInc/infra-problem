@@ -8,7 +8,7 @@
             [common-utils.middleware :refer [correlation-id-middleware]]
             [ring.middleware.reload :refer [wrap-reload]]
             [clojure.tools.logging :as log]
-            [ring.adapter.jetty :as jetty]))
+            [org.httpkit.server :refer [run-server]]))
 
 (defroutes app-routes
   (context "/api" []
@@ -23,5 +23,5 @@
 (defn -main []
   (let [port (Integer/parseInt (utils/config "APP_PORT" "8080"))]
     (log/info "Running newsfeed on port" port)
-    (future (jetty/run-jetty (var app) {:host "0.0.0.0"
-                                        :port port}))))
+    (run-server (var app) {:ip "0.0.0.0"
+                           :port port})))

@@ -16,11 +16,12 @@
 
 (defn- response-is-good?
   [response]
-  (let [status (:status response)]
-    (if (and (>= 200 status)
-             (< status 300))
-      true
-      (do (log/warn "Feed returned bad status" status (get-in response [:opts :url]))))))
+  (let [error (:error response)
+        status (:status response)]
+    (cond (not (nil? error))                   (do (log/warn error "Feed returned error") false)
+          (nil? status)                        (do (log/warn "Could not get status of response" response) false)
+          (and (>= 200 status) (< status 300)) true
+          :else                                false)))
 
 (defn get-feeds
   [urls]
