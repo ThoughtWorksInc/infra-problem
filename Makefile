@@ -1,5 +1,5 @@
 BUILD_DIR=build
-APPS=front-end quotes
+APPS=front-end quotes newsfeed
 LIBS=common-utils
 STATIC_BASE=front-end/public
 STATIC_PATHS=css

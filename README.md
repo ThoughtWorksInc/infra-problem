@@ -27,10 +27,19 @@ All the apps take environment variables to configure them
 * `APP_PORT`: The port on which to run the app
 * `STATIC_URL`: The URL on which to find the static assets (should be `http://localhost:8000` if you're using the `serve.py` app referenced above)
 * `QUOTE_SERVICE_URL`: The URL on which to find the quote service
+* `NEWSFEED_SERVICE_URL`: The URL on which to find the newsfeed service
 
 ### Quote service
 
 `java -jar build/quotes.jar`
+
+*Environment variables*
+
+* `APP_PORT`: The port on which to run the app
+
+### Newsfeed service
+
+`java -jar build/newsfeed.jar`
 
 *Environment variables*
 
