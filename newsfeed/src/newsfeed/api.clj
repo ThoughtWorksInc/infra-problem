@@ -4,6 +4,7 @@
             [feedparser-clj.core :as feed]
             [clojure.data.json :as json]
             [org.httpkit.client :as http]
+            [clojure.tools.logging :as log]
             [ring.util.response :refer :all]))
 
 (def options {:timeout 1000
@@ -13,12 +14,26 @@
                 "http://www.martinfowler.com/feed.atom"
                 "https://www.thoughtworks.com/rss/insights.xml"])
 
+(defn- response-is-good?
+  [response]
+  (let [status (:status response)]
+    (if (and (>= 200 status)
+             (< status 300))
+      true
+      (do (log/warn "Feed returned bad status" status (get-in response [:opts :url]))))))
+
 (defn get-feeds
   [urls]
   (->> urls
       (map #(http/get % options))
       (map deref)
+      (filter response-is-good?)
       (map :body)))
+
+(defn parse-feed
+  [feed]
+  (try (feed/parse-feed feed)
+       (catch Exception e (log/warn e "Error parsing feed"))))
 
 (defn get-sort-value
   [item]
@@ -43,7 +58,7 @@
     (->> feeds
          (map #(.getBytes %))
          (map clojure.java.io/input-stream)
-         (map feed/parse-feed)
+         (map parse-feed)
          (map process-feed)
          (combine-feeds))))
 
