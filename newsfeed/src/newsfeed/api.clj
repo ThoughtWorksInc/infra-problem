@@ -40,13 +40,13 @@
 
 (defn get-sort-value
   [item]
-  (if (not (nil? (:updated-date item)))
+  (if-not (nil? (:updated-date item))
     (:updated-date item)
     (:published-date item)))
 
 (defn combine-feeds
   [feeds]
-  (take 20 (reverse (sort-by get-sort-value (apply concat (map :entries feeds))))))
+  (take 20 (reverse (sort-by get-sort-value (mapcat :entries feeds)))))
 
 (defn process-feed
   [feed]
