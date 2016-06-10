@@ -1,5 +1,10 @@
 # DevOps Assessment
 
+## Prerequisites
+
+* Java
+* [Leiningen](http://leiningen.org/) (can be installed using `brew install leiningen`)
+
 ## Running tests
 
 You can run the tests of all apps by using `make test`
