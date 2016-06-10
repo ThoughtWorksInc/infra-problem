@@ -13,3 +13,4 @@ pom.xml.asc
 *.swp
 .DS_Store
 *.iml
+.idea/
