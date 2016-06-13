@@ -7,6 +7,7 @@
                  [http-kit "2.1.18"]
                  [org.clojars.scsibug/feedparser-clj "0.4.0"]
                  [org.clojure/tools.logging "0.3.1"]
+                 [ch.qos.logback/logback-classic "1.1.7"]
                  [ring/ring-devel "1.4.0"]]
   :main ^:skip-aot newsfeed.core
   :target-path "target/%s"
@@ -17,4 +18,5 @@
                                       [midje "1.8.3"]]
                        :plugins      [[lein-midje "3.2"]]
                        :aliases      {"test" ["midje"]}}
+             :midje   {:resource-paths ["test/resources/"]}
              })
