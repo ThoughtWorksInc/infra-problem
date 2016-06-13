@@ -9,6 +9,9 @@
 (def newsfeed-service-url
   (utils/config "NEWSFEED_SERVICE_URL" "http://localhost:8080"))
 
+(def newsfeed-token
+  (utils/config "NEWSFEED_SERVICE_TOKEN" ""))
+
 (def options {:as         :text
               :timeout    1000
               :user-agent "front-end"})
@@ -30,7 +33,9 @@
   (json/read-str (:body (handle-response resp))))
 
 (defn get-news []
-  (http/get (str newsfeed-service-url "/api/feeds") options))
+  (http/get (str newsfeed-service-url "/api/feeds") (assoc-in options
+                                                              [:headers "X-Auth-Token"]
+                                                              newsfeed-token)))
 
 (defn- handle-news-values
   [key value]

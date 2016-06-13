@@ -10,10 +10,25 @@
             [clojure.tools.logging :as log]
             [org.httpkit.server :refer [run-server]]))
 
+(def tokens #{"T1&eWbYXNWG1w1^YGKDPxAWJ@^et^&kX"})
+
+(defn- valid-token?
+  [token]
+  (when (contains? tokens token)
+    token))
+
+(defn- token-auth
+  [app]
+  (fn [request]
+    (if-let [token (valid-token? (get-in request [:headers "x-auth-token"]))]
+      (app request)
+      {:status 403
+       :body   (json/write-str {:error "Invalid auth token"})})))
+
 (defroutes app-routes
   (GET "/ping" [] {:status 200})
   (context "/api" []
-           (api-routes))
+           (token-auth (api-routes)))
   (route/not-found (json/write-str {:error "Not found"})))
 
 (def app

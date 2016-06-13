@@ -33,6 +33,7 @@ All the apps take environment variables to configure them and expose the URL `/p
 * `STATIC_URL`: The URL on which to find the static assets (should be `http://localhost:8000` if you're using the `serve.py` app referenced above)
 * `QUOTE_SERVICE_URL`: The URL on which to find the quote service
 * `NEWSFEED_SERVICE_URL`: The URL on which to find the newsfeed service
+* `NEWSFEED_SERVICE_TOKEN`: The authentication token that allows the app to talk to the newsfeed service.
 
 ### Quote service
 
