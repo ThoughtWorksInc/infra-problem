@@ -24,6 +24,10 @@
   (base [:h1 "Internal error"]
         [:div.row [:div.alert.alert-danger "An error occurred when processing your request. Please try again later"]]))
 
+(defn not-found []
+  (base [:h1 "Not found"]
+        [:div.row [:div.alert.alert-danger "Sorry but we couldn't find the page you were looking for."]]))
+
 (defn index
   [quot news]
   (base [:h1 "Newsfeed"]
