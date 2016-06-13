@@ -9,6 +9,7 @@
             [org.httpkit.server :refer [run-server]]))
 
 (defroutes app-routes
+  (GET "/ping" [] {:status 200})
   (context "/api" []
            (api-routes)))
 

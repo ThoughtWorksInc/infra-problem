@@ -17,7 +17,7 @@ To build all the JARs and generate the static tarball, run the `make clean all` 
 
 ## Running
 
-All the apps take environment variables to configure them
+All the apps take environment variables to configure them and expose the URL `/ping` which will just return a 200 response that you can use with e.g. a load balancer to check if the app is running.
 
 ### Static assets
 

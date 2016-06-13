@@ -26,6 +26,7 @@
                                  :body   (views/error)})))))
 
 (defroutes app-routes
+  (GET "/ping" [] {:status 200})
   (GET "/" [] (index))
   (route/not-found "<h1>Not found</h1>"))
 
