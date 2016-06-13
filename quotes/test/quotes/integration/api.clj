@@ -6,6 +6,8 @@
 
 (facts "about 'api'"
        (let [app (p/session routes/app)]
+         (fact "returns 200 on /ping"
+               (get-in (p/request app "/ping") [:response :status]) => 200)
          (fact "returns 200 on quote API and contains correct response"
                (let [{response :response} (p/request app "/api/quote")
                      json-response (json/read-str (:body response))]

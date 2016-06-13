@@ -19,4 +19,4 @@
          (fact "returns 200 on /api/feeds when valid token given"
                (get-in (p/request app "/api/feeds" :headers {"X-Auth-Token" "valid"}) [:response :status]) => 200
                (provided (contains? nf/tokens "valid") => true
-                         (api/get-feeds anything) => '()))))
+                         (api/get-feeds anything) => '())))) ; fake the feed calls
