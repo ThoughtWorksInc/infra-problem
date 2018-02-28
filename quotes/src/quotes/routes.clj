@@ -3,6 +3,7 @@
   (:use [quotes.api :only [api-routes]])
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
+            [clojure.data.json :as json]
             [common-utils.core :as utils]
             [common-utils.middleware :refer [correlation-id-middleware]]
             [clojure.tools.logging :as log]
@@ -11,7 +12,8 @@
 (defroutes app-routes
   (GET "/ping" [] {:status 200})
   (context "/api" []
-           (api-routes)))
+           (api-routes))
+  (route/not-found (json/write-str {:error "Not found"})))
 
 (def app
   (-> app-routes
