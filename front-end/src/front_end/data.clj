@@ -1,13 +1,18 @@
 (ns front-end.data
   (:require [common-utils.core :as utils]
             [clojure.data.json :as json]
+            [clojure.string :as st]
             [org.httpkit.client :as http]))
 
+(defn- remove-trailing-slashes
+  [s]
+  (st/replace s #"/+$" ""))
+
 (def quote-service-url
-  (utils/config "QUOTE_SERVICE_URL" "http://localhost:8080"))
+  (remove-trailing-slashes (utils/config "QUOTE_SERVICE_URL" "http://localhost:8080")))
 
 (def newsfeed-service-url
-  (utils/config "NEWSFEED_SERVICE_URL" "http://localhost:8080"))
+  (remove-trailing-slashes (utils/config "NEWSFEED_SERVICE_URL" "http://localhost:8080")))
 
 (def newsfeed-token
   (utils/config "NEWSFEED_SERVICE_TOKEN" ""))
