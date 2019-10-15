@@ -4,7 +4,7 @@
                  [org.clojure/data.json "0.2.6"]
                  [compojure "1.5.0"]
                  [com.thoughtworks/common-utils "0.1.0-SNAPSHOT"]
-                 [http-kit "2.1.18"]
+                 [http-kit "2.3.0"]
                  [org.clojars.scsibug/feedparser-clj "0.4.0"]
                  [org.clojure/tools.logging "0.3.1"]
                  [ch.qos.logback/logback-classic "1.1.7"]

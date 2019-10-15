@@ -5,15 +5,27 @@
             [clojure.data.json :as json]
             [org.httpkit.client :as http]
             [clojure.tools.logging :as log]
-            [ring.util.response :refer :all]))
+            [ring.util.response :refer :all])
+  (:import (javax.net.ssl SSLEngine SSLParameters SNIHostName)
+           (java.net URI)))
 
-(def options {:timeout 1000
+; PATCH around https://github.com/http-kit/http-kit/issues/334
+(defn sni-configure
+  [^SSLEngine ssl-engine ^URI uri]
+  (let [^SSLParameters ssl-params (.getSSLParameters ssl-engine)]
+    (.setServerNames ssl-params [(SNIHostName. (.getHost uri))])
+    (.setSSLParameters ssl-engine ssl-params)))
+
+(def client (http/make-client {:ssl-configurer sni-configure}))
+
+(def options {:client client
+              :timeout 5000
               :user-agent "Newsfeed"})
 
 (def feed-urls ["https://www.reddit.com/r/sysadmin/.rss"
                 "https://www.reddit.com/r/programming/.rss"
                 "https://news.ycombinator.com/rss"
-                "http://www.martinfowler.com/feed.atom"
+                "https://www.martinfowler.com/feed.atom"
                 "https://www.thoughtworks.com/rss/insights.xml"])
 
 (defn- response-is-good?
