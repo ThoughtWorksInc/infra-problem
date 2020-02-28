@@ -18,7 +18,7 @@
        (fact "handle-news-response catches errors"
              (data/handle-news-response (future bad-response)) => (throws Exception "Error getting response: status 500 returned"))
        (fact "handle-news-response correctly processes entries"
-             (let [d (.parse (java.text.SimpleDateFormat. "yyyy-MM-dd") "2015-01-01T00:00:00.000+0000")]
+             (let [d (.parse (java.text.SimpleDateFormat. "yyyy-MM-dd'T'kk:mm:ss.SSSX") "2015-01-01T00:00:00.000+0000")]
                (data/handle-news-response (future good-news-response))
                => [{"published-date" d
                     "title"          "Title 1"
