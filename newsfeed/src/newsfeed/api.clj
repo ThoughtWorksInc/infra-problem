@@ -80,7 +80,7 @@
 (defn format-key-value
   [key value]
   (if (instance? java.util.Date value)
-    (.format (java.text.SimpleDateFormat. "yyyy-MM-dd'T'HH:mm:ss.SSSZ") value)
+    (.format (doto (java.text.SimpleDateFormat. "yyyy-MM-dd'T'HH:mm:ss.SSSZ") (.setTimeZone (java.util.TimeZone/getTimeZone "UTC"))) value)
     value))
 
 (defn api-routes []
